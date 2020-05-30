@@ -94,7 +94,6 @@ function updateValueFromMap (branch, map, value) {
     } else { throw new Error('Map is not accurate') }
   } else {
     // mutate
-    console.log(branch, value)
     if (value === null) {
       for (const key in branch) {
         if (branch.hasOwnProperty(key)) {
