@@ -83,6 +83,19 @@ tape('student', async function (t) {
       t.end()
     })
   })
+
+  t.test('DELETE value', (t) => {
+    jsonist.delete(`${endpoint}/${studentId}/courses/calculus/quizzes`, async (err, body, res) => {
+      if (err) {
+        t.error(err)
+      } else {
+        t.equals(res.statusCode, 202)
+        delete require.cache[require.resolve(`./data/${studentId}.json`)]
+        t.looseEqual(require(`./data/${studentId}.json`).courses.calculus.quizzes, {})
+      }
+      t.end()
+    })
+  })
 })
 
 tape('cleanup', function (t) {

@@ -18,6 +18,12 @@ router.route('/:studentId/*').put((req, res) => {
   getStudent(params.studentId, params[0]).then((data) => {
     res.send(data)
   }).catch(() => res.sendStatus(404))
+}).delete((req, res) => {
+  let params = req.params
+  createOrUpdateStudent(params.studentId, params[0], null)
+    .then((data) => {
+      res.status(202).send({})
+    }).catch(() => res.sendStatus(404))
 })
 
 function getStudent (id, path) {
@@ -88,7 +94,16 @@ function updateValueFromMap (branch, map, value) {
     } else { throw new Error('Map is not accurate') }
   } else {
     // mutate
-    Object.assign(branch, value)
+    console.log(branch, value)
+    if (value === null) {
+      for (const key in branch) {
+        if (branch.hasOwnProperty(key)) {
+          delete branch[key]
+        }
+      }
+    } else {
+      Object.assign(branch, value)
+    }
   }
 }
 
