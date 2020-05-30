@@ -16,7 +16,7 @@ tape('health', async function (t) {
 })
 
 tape('student', async function (t) {
-  const studentId = '5tudentId-' + Math.floor(Math.random() * 101)
+  const studentId = '5tudentId-' + Math.floor(Math.random() * 100000001)
   const path = ['courses', 'calculus', 'quizzes', 'something']
   const url = `${endpoint}/${studentId}/${path.join('/')}`
   const initialBody = { score: 98 }
